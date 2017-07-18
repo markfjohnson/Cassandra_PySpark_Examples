@@ -1,0 +1,1 @@
+dcos spark run --submit-args="--packages datastax:spark-cassandra-connector:2.0.1-s_2.11 TestPythonConnection.py"
