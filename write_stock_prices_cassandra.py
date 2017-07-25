@@ -19,23 +19,27 @@ session.execute("""
 
 session.execute("""
       CREATE TABLE stock_prices (
-          thekey text,
-          col1 text,
-          col2 text,
-          PRIMARY KEY (thekey, col1)
+        transDate timestamp,
+        openPrice float,
+        high float,
+        low float,
+        closePrice float,
+        adj_price FLOAT,
+        volume int
+          PRIMARY KEY (transDate)
       )
       """)
 
 # Run the batch to read a block of input file rows and then prepare a cassandra write batch
 
-insert_user = session.prepare("INSERT INTO users (name, age) VALUES (?, ?)")
-batch = BatchStatement(consistency_level=ConsistencyLevel.QUORUM)
+#insert_user = session.prepare("INSERT INTO users (name, age) VALUES (?, ?)")
+#batch = BatchStatement(consistency_level=ConsistencyLevel.QUORUM)
 
-for (name, age) in users_to_insert:
-    batch.add(insert_user, (name, age))
+#for (name, age) in users_to_insert:
+#    batch.add(insert_user, (name, age))
 
-session.execute(batch)
+#session.execute(batch)
 
-rows = session.execute('select * from table limit 5;')
-for row in rows:
-    print row.id
+#rows = session.execute('select * from table limit 5;')
+#for row in rows:
+#    print row.id
