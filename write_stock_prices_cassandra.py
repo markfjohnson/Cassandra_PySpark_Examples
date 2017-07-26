@@ -2,7 +2,7 @@ from cassandra.cluster import Cluster
 from cassandra import ConsistencyLevel
 from cassandra.query import *
 
-from pyspark import SparkContext
+from pyspark import SparkContext, SparkConf, SQLContext
 from pyspark.sql import SparkSession
 from pyspark import SparkConf
 from pyspark.sql import SQLContext
@@ -14,11 +14,7 @@ KEYSPACE="Financial"
 import_file = "s3a://mark-johnson/CCL.csv"
 
 sc = SparkContext(appName="PySpark Cassandra File Write Example")
-hadoopConf = sc.hadoopConfiguration;
 
-hadoopConf.set("fs.s3.impl", "org.apache.hadoop.fs.s3native.NativeS3FileSystem")
-hadoopConf.set("fs.s3.awsAccessKeyId", "xxxxxxx")
-hadoopConf.set("fs.s3.awsSecretAccessKey", "xxxxxxx")
 
 spark = SparkSession.builder \
     .appName("PySpark Cassandra File Write Example") \
@@ -54,8 +50,9 @@ session.execute("""
 #      )
 #      """)
 
-myRDD = sc.textFile(import_file)
-print(myRDD.count())
+
+lines = sc.textFile(import_file)
+print(lines.count())
 
 
 #df = spark.read.csv(import_file, header=True)
