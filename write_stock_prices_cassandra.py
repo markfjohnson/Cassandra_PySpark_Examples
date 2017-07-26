@@ -7,7 +7,7 @@ KEYSPACE="Financial"
 
 sc = SparkContext(appName="PySpark Cassandra File Write Example")
 
-cluster = Cluster(['node-0.cassandra.mesos:9042'])  # provide contact points and port
+cluster = Cluster(['node-0.cassandra.mesos'])  # provide contact points and port
 
 # Verify Tables and Keyspaces exist for data if not then create it
 session = cluster.connect()
