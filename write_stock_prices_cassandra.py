@@ -48,6 +48,7 @@ session.execute("""
 #      """)
 
 myRDD = sc.textFile(import_file)
+print(myRDD.count())
 
 #df = spark.read.csv(import_file, header=True)
 #print(df.head())
