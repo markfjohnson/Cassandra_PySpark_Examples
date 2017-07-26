@@ -30,6 +30,8 @@ session.execute("""
       )
       """)
 
+
+
 # Run the batch to read a block of input file rows and then prepare a cassandra write batch
 
 #insert_user = session.prepare("INSERT INTO users (name, age) VALUES (?, ?)")
