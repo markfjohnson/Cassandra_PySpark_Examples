@@ -10,7 +10,8 @@ from pyspark.sql import SQLContext
 
 
 KEYSPACE="Financial"
-import_file = "https://s3.amazonaws.com/mark-johnson/CCL.csv"
+#import_file = "https://s3.amazonaws.com/mark-johnson/CCL.csv"
+import_file = "s3://mark-johnson/CCL.csv"
 
 sc = SparkContext(appName="PySpark Cassandra File Write Example")
 spark = SparkSession.builder \
