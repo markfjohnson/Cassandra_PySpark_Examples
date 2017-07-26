@@ -17,18 +17,7 @@ session.execute("""
      WITH replication = { 'class': 'SimpleStrategy', 'replication_factor': '2' }
      """ % KEYSPACE)
 
-session.execute("""
-      CREATE TABLE stock_prices (
-        transDate timestamp,
-        openPrice float,
-        high float,
-        low float,
-        closePrice float,
-        adj_price FLOAT,
-        volume int
-          PRIMARY KEY (transDate)
-      )
-      """)
+
 
 
 
