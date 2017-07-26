@@ -1,1 +1,2 @@
-dcos spark run --submit-args="--packages datastax:spark-cassandra-connector:2.0.1-s_2.11,joda-time:joda-time:2.3 https://github.com/markfjohnson/Cassandra_PySpark_Examples/blob/master/TestPythonConnection.py"
+#!/usr/bin/env bash
+dcos spark run --docker-image=markfjohnson/spark_pandas --submit-args="https://raw.githubusercontent.com/markfjohnson/Cassandra_PySpark_Examples/master/write_stock_prices_cassandra.py" --verbose
