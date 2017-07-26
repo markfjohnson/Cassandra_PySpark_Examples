@@ -12,12 +12,23 @@ cluster = Cluster(['node-0.cassandra.mesos'])  # provide contact points and port
 # Verify Tables and Keyspaces exist for data if not then create it
 session = cluster.connect()
 
+#session.execute("""
+#     CREATE KEYSPACE %s
+#     WITH replication = { 'class': 'SimpleStrategy', 'replication_factor': '2' }
+#     """ % KEYSPACE)
+
 session.execute("""
-     CREATE KEYSPACE %s
-     WITH replication = { 'class': 'SimpleStrategy', 'replication_factor': '2' }
-     """ % KEYSPACE)
-
-
+      CREATE TABLE stock_prices (
+        transDate timestamp,
+        openPrice float,
+        high float,
+        low float,
+        closePrice float,
+        adj_price FLOAT,
+        volume int,
+          PRIMARY KEY (transDate)
+      )
+      """)
 
 
 
