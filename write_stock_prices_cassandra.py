@@ -11,7 +11,7 @@ from pyspark.sql import SQLContext
 
 KEYSPACE="Financial"
 #import_file = "https://s3.amazonaws.com/mark-johnson/CCL.csv"
-import_file = "s3n://mark-johnson/CCL.csv"
+import_file = "s3a://mark-johnson/CCL.csv"
 
 sc = SparkContext(appName="PySpark Cassandra File Write Example")
 spark = SparkSession.builder \
