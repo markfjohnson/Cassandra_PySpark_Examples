@@ -16,9 +16,11 @@ session = cluster.connect()
 #     CREATE KEYSPACE %s
 #     WITH replication = { 'class': 'SimpleStrategy', 'replication_factor': '2' }
 #     """ % KEYSPACE)
+
 session.execute("""
     USE financial;
 """)
+
 session.execute("""
       CREATE TABLE stock_prices (
         transDate timestamp,
