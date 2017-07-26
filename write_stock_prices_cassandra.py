@@ -20,6 +20,7 @@ spark = SparkSession.builder \
     .getOrCreate()
 
 
+
 cluster = Cluster(['node-0.cassandra.mesos'])  # provide contact points and port
 
 # Verify Tables and Keyspaces exist for data if not then create it
