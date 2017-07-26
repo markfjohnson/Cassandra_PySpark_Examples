@@ -14,6 +14,12 @@ KEYSPACE="Financial"
 import_file = "s3a://mark-johnson/CCL.csv"
 
 sc = SparkContext(appName="PySpark Cassandra File Write Example")
+hadoopConf = sc.hadoopConfiguration;
+
+hadoopConf.set("fs.s3.impl", "org.apache.hadoop.fs.s3native.NativeS3FileSystem")
+hadoopConf.set("fs.s3.awsAccessKeyId", "xxxxxxx")
+hadoopConf.set("fs.s3.awsSecretAccessKey", "xxxxxxx")
+
 spark = SparkSession.builder \
     .appName("PySpark Cassandra File Write Example") \
     .config("spark.sql.crossJoin.enabled", "true") \
