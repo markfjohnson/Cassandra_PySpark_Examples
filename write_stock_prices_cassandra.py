@@ -2,8 +2,10 @@ from cassandra.cluster import Cluster
 from cassandra.query import *
 from pyspark import SparkContext
 from cassandra import ConsistencyLevel
+import csv
 
 KEYSPACE="Financial"
+import_file = "https://s3.amazonaws.com/mark-johnson/CCL.csv"
 
 sc = SparkContext(appName="PySpark Cassandra File Write Example")
 
@@ -21,24 +23,32 @@ session.execute("""
     USE financial;
 """)
 
-session.execute("""
-      CREATE TABLE stock_prices (
-        transDate timestamp,
-        openPrice float,
-        high float,
-        low float,
-        closePrice float,
-        adj_price FLOAT,
-        volume int,
-          PRIMARY KEY (transDate)
-      )
-      """)
+#session.execute("""
+#      CREATE TABLE stock_prices (
+#        transDate timestamp,
+#        openPrice float,
+#        high float,
+#        low float,
+#        closePrice float,
+#        adj_price FLOAT,
+#        volume int,
+#          PRIMARY KEY (transDate)
+#      )
+#      """)
+
+df = session.read.csv(import_file, header=True)
+print(df.head())
+myList = df.collect()
+print (myList)
+
+
+
 
 
 
 # Run the batch to read a block of input file rows and then prepare a cassandra write batch
 
-#insert_user = session.prepare("INSERT INTO users (name, age) VALUES (?, ?)")
+#insert_stock = session.prepare("INSERT INTO users (transDate,openPrice, high,low,closePrice, adj_price, volume) VALUES (?, ?, ?, ?, ?, ?, ?)")
 #batch = BatchStatement(consistency_level=ConsistencyLevel.QUORUM)
 
 #for (name, age) in users_to_insert:
