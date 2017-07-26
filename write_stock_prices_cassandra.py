@@ -11,7 +11,7 @@ from pyspark.sql import SQLContext
 
 KEYSPACE="Financial"
 #import_file = "https://s3.amazonaws.com/mark-johnson/CCL.csv"
-import_file = "s3://mark-johnson/CCL.csv"
+import_file = "s3n://mark-johnson/CCL.csv"
 
 sc = SparkContext(appName="PySpark Cassandra File Write Example")
 spark = SparkSession.builder \
@@ -47,11 +47,12 @@ session.execute("""
 #      )
 #      """)
 
+myRDD = sc.textFile(import_file)
 
-df = spark.read.csv(import_file, header=True)
-print(df.head())
-myList = df.collect()
-print (myList)
+#df = spark.read.csv(import_file, header=True)
+#print(df.head())
+#myList = df.collect()
+#print (myList)
 
 
 
