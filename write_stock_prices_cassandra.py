@@ -1,13 +1,23 @@
 from cassandra.cluster import Cluster
-from cassandra.query import *
-from pyspark import SparkContext
 from cassandra import ConsistencyLevel
-import csv
+from cassandra.query import *
+
+from pyspark import SparkContext
+from pyspark.sql import SparkSession
+from pyspark import SparkConf
+from pyspark.sql import SQLContext
+
+
 
 KEYSPACE="Financial"
 import_file = "https://s3.amazonaws.com/mark-johnson/CCL.csv"
 
 sc = SparkContext(appName="PySpark Cassandra File Write Example")
+spark = SparkSession.builder \
+    .appName("PySpark Cassandra File Write Example") \
+    .config("spark.sql.crossJoin.enabled", "true") \
+    .getOrCreate()
+
 
 cluster = Cluster(['node-0.cassandra.mesos'])  # provide contact points and port
 
@@ -37,7 +47,7 @@ session.execute("""
 #      """)
 
 
-df = sc.read.csv(import_file, header=True)
+df = spark.read.csv(import_file, header=True)
 print(df.head())
 myList = df.collect()
 print (myList)
