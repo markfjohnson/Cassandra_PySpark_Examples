@@ -36,7 +36,7 @@ session.execute("""
 #      )
 #      """)
 
-df = session.read.csv(import_file, header=True)
+df = sc.read.csv(import_file, header=True)
 print(df.head())
 myList = df.collect()
 print (myList)
